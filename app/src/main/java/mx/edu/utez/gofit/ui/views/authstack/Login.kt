@@ -26,7 +26,7 @@ fun Login(onLoginSuccess: () -> Unit) {
                 Text(text = "hola")
 
                 Button(onClick = { onLoginSuccess() }) {
-                    Text(text = "prueba")
+                    Text(text = "Entrar")
                 }
             }
         }
