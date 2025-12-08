@@ -17,11 +17,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             GoFitTheme {
                 setContent {
-                    RootNavigation()
+                    RootNavigation(AppContainer(this))
                 }
-                    /*Login(
-                        modifier = Modifier.padding(innerPadding)
-                    )*/
             }
         }
     }

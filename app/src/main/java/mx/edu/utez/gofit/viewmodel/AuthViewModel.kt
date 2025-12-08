@@ -22,7 +22,7 @@ class AuthViewModel(private val repo: AuthRepository) : ViewModel() {
             uiState = if (result.isSuccess) {
                 uiState.copy(loading = false, success = true)
             } else {
-                uiState.copy(loading = false, error = result.exceptionOrNull()?.message)
+                uiState.copy(loading = false, error = "Correo o contraseña incorrectos")
             }
         }
     }
@@ -36,7 +36,7 @@ class AuthViewModel(private val repo: AuthRepository) : ViewModel() {
             uiState = if (result.isSuccess) {
                 uiState.copy(loading = false, success = true)
             } else {
-                uiState.copy(loading = false, error = result.exceptionOrNull()?.message)
+                uiState.copy(loading = false, error = "Error al registrarse")
             }
         }
     }

@@ -1,4 +1,4 @@
-package mx.edu.utez.gofit.datastore
+package mx.edu.utez.gofit.data
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit

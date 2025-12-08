@@ -43,7 +43,7 @@ fun LoginScreen( authState: AuthState, login: (String, String) -> Unit, onLoginS
         TextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("Username") }
+            label = { Text("Email") }
         )
 
         Spacer(modifier = Modifier.height(12.dp))

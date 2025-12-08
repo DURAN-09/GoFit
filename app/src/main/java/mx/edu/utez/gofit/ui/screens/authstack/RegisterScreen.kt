@@ -33,7 +33,6 @@ fun RegisterScreen(
     onRegisterSuccess: () -> Unit
 ) {
 
-    var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
 

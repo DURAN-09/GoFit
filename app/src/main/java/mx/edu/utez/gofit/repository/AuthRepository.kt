@@ -1,6 +1,6 @@
 package mx.edu.utez.gofit.repository
 
-import mx.edu.utez.gofit.datastore.UserPreferences
+import mx.edu.utez.gofit.data.UserPreferences
 import mx.edu.utez.gofit.model.LoginRequest
 import mx.edu.utez.gofit.model.RegisterRequest
 import mx.edu.utez.gofit.network.AuthApi
