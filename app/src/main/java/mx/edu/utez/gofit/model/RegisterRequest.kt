@@ -1,6 +1,8 @@
 package mx.edu.utez.gofit.model
 
-data class LoginRequest (
+import android.provider.ContactsContract
+
+data class RegisterRequest(
     private val email: String,
     private val password: String
 )

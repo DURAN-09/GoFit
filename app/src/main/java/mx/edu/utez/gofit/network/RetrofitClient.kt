@@ -6,7 +6,7 @@ import kotlin.jvm.java
 
 
 object RetrofitClient {
-    private const val BASE_URL="" //pendiente
+    private const val BASE_URL="https://gofit-api.fly.dev" //pendiente
 
     private val retrofit : Retrofit by lazy {
         Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
