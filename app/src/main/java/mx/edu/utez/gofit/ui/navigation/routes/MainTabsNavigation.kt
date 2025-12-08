@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mx.edu.utez.gofit.ui.navigation.routes.main.MainRoutes
-import mx.edu.utez.gofit.ui.views.maintabs.Home
+import mx.edu.utez.gofit.ui.screens.maintabs.Home
 
 @Composable
 fun MainTabsNavigation() {

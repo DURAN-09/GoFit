@@ -1,3 +1,3 @@
 package mx.edu.utez.gofit.model
 
-data class UpdateDailyGoalRequest(private val distance: Number)
+data class UpdateDailyGoalRequest(val distance: Number)

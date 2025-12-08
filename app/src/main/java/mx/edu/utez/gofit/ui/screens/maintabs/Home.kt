@@ -1,4 +1,4 @@
-package mx.edu.utez.gofit.ui.views.maintabs
+package mx.edu.utez.gofit.ui.screens.maintabs
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text

@@ -1,5 +1,6 @@
 package mx.edu.utez.gofit.network
 
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.jvm.java
@@ -8,8 +9,15 @@ import kotlin.jvm.java
 object RetrofitClient {
     private const val BASE_URL="https://gofit-api.fly.dev"
 
+    private val okHttpClient: OkHttpClient by lazy {
+        OkHttpClient.Builder().build() //TODO: Add JWT token interceptor
+    }
+
+
     private val retrofit : Retrofit by lazy {
-        Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+        Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
