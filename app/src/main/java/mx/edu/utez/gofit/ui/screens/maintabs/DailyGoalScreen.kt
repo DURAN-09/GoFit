@@ -124,20 +124,20 @@ fun DailyGoalScreenPreview(){
                 goal = DailyGoalResponse(
                     id = 1,
                     distanceMeter = 1000,
-                    createdAt = java.time.LocalDateTime.now(),
-                    updatedAt = java.time.LocalDateTime.now()
+                    createdAt = java.time.LocalDateTime.now().toString(),
+                    updatedAt = java.time.LocalDateTime.now().toString()
                 ),
                 sessions = listOf(
                     RunSessionResponse(
                         id = 1,
                         steps = 700,
                         distanceMeters = 400.toDouble(),
-                        startedAt = java.time.LocalDateTime.now(),
-                        endedAt = java.time.LocalDateTime.now().plus(1, ChronoUnit.HOURS),
-                        createdAt = java.time.LocalDateTime.now(),
-                        updatedAt = java.time.LocalDateTime.now(),
+                        startedAt = java.time.LocalDateTime.now().toString(),
+                        endedAt = java.time.LocalDateTime.now().plus(1, ChronoUnit.HOURS).toString(),
+                        createdAt = java.time.LocalDateTime.now().toString(),
+                        updatedAt = java.time.LocalDateTime.now().toString(),
                         userId = 1,
-                        durationSeconds = 1000
+                        durationSeconds = 1000.toDouble()
                     )
                 ),
                 todayProgress = 500f,

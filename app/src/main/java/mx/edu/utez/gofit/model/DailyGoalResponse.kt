@@ -8,8 +8,8 @@ data class DailyGoalResponse(
     @SerializedName("distance")
     val distanceMeter: Number,
     @SerializedName("created_at")
-    val createdAt: LocalDateTime,
+    val createdAt: String,
     @SerializedName("updated_at")
-    val updatedAt: LocalDateTime
+    val updatedAt: String
 
 )
