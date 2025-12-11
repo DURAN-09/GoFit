@@ -19,7 +19,6 @@ class AppContainer(context: Context) {
     val goalsRepository = GoalsRepository(retrofitClient.goalsApi)
     val leaderboardRepository = LeaderboardRepository(retrofitClient.leaderboardApi)
     val runSessionsRepository = RunSessionsRepository(retrofitClient.runSessionsApi)
-
     val authViewModelFactory = AuthViewModelFactory(authRepository)
 }
 

@@ -1,24 +1,15 @@
 package mx.edu.utez.gofit.network
 
-import mx.edu.utez.gofit.model.RegisterRunSessionRequest
-import mx.edu.utez.gofit.model.RunSessionResponse
-import retrofit2.http.DELETE
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
+import mx.edu.utez.gofit.data.RunSession
+import mx.edu.utez.gofit.data.RunSessionRequest
 
 interface RunSessionsApi {
-
     @GET("/run_sessions")
-    suspend fun getRunSessions(): List<RunSessionResponse>
+    suspend fun getRunSessions(): List<RunSession>
 
     @POST("/run_sessions")
-    suspend fun registerRunSession(request: RegisterRunSessionRequest): RunSessionResponse
-
-    @GET("/run_sessions/{id}")
-    suspend fun getRunSession(@Path("id") id: Long): RunSessionResponse
-
-    @DELETE("/run_sessions/{id}")
-    suspend fun deleteRunSession(@Path("id") id: Long)
-
+    suspend fun postRunSession(@Body request: RunSessionRequest): RunSession
 }

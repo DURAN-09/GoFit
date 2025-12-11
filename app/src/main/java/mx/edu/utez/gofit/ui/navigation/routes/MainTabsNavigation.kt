@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mx.edu.utez.gofit.ui.navigation.routes.main.MainRoutes
 import mx.edu.utez.gofit.ui.screens.maintabs.Home
+import mx.edu.utez.gofit.ui.screens.maintabs.RecordScreen
 
 @Composable
 fun MainTabsNavigation() {
@@ -25,7 +26,7 @@ fun MainTabsNavigation() {
             modifier = Modifier.padding(padding)
         ) {
             composable(MainRoutes.HOME) { Home() }
-            //composable(MainRoutes.PROFILE) { ProfileScreen() }
+            composable(MainRoutes.RECORD) { RecordScreen() }
         }
     }
 }

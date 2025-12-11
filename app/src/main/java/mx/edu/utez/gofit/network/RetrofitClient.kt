@@ -1,9 +1,11 @@
 package mx.edu.utez.gofit.network
 
+import mx.edu.utez.gofit.data.RunSession
 import mx.edu.utez.gofit.data.UserPreferences
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import kotlin.jvm.java
 
 
@@ -15,6 +17,15 @@ class RetrofitClient(
         OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor(userPreferences))
             .build()
+    }
+
+    interface DailyGoalsService {
+        @GET("daily_goals")
+        suspend fun getDailyGoals(): List<RunSession>
+    }
+
+    val dailyGoalsApi: DailyGoalsService by lazy {
+        retrofit.create(DailyGoalsService::class.java)
     }
 
 
