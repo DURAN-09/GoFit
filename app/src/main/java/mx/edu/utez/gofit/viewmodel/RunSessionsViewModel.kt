@@ -4,12 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import mx.edu.utez.gofit.data.RunSession
+import mx.edu.utez.gofit.model.RunSessionResponse
 import mx.edu.utez.gofit.repository.RunSessionsRepository
+import java.time.LocalDateTime
 
 class RunSessionsViewModel(private val repo: RunSessionsRepository) : ViewModel() {
 
-    var sessions = MutableStateFlow<List<RunSession>>(emptyList())
+    var sessions = MutableStateFlow<List<RunSessionResponse>>(emptyList())
         private set
 
     init {
@@ -26,7 +27,7 @@ class RunSessionsViewModel(private val repo: RunSessionsRepository) : ViewModel(
         }
     }
 
-    fun sendSession(steps: Int, started: String, ended: String) {
+    fun sendSession(steps: Int, started: LocalDateTime, ended: LocalDateTime) {
         viewModelScope.launch {
             try {
                 repo.sendRunSession(steps, started, ended)

@@ -53,7 +53,7 @@ fun RootNavigation(container: AppContainer) {
         }
 
         composable(RootRoutes.MAIN_TABS) {
-            MainTabsNavigation()
+            MainTabsNavigation(appContainer = container)
         }
     }
 }

@@ -1,4 +1,4 @@
-package mx.edu.utez.gofit.ui
+package mx.edu.utez.gofit.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,12 +9,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import mx.edu.utez.gofit.data.RunSession
+import mx.edu.utez.gofit.model.RunSessionResponse
+import mx.edu.utez.gofit.ui.theme.GoFitTheme
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalAmount
+import kotlin.time.Duration.Companion.hours
 
 @Composable
-fun RunSessionsTable(sessions: List<RunSession>) {
+fun RunSessionsTable(sessions: List<RunSessionResponse>) {
     Column(
         Modifier
             .fillMaxWidth()
@@ -37,11 +43,33 @@ fun RunSessionsTable(sessions: List<RunSession>) {
 
         sessions.forEach { s ->
             Row(Modifier.fillMaxWidth()) {
-                Text(s.started_at.take(10), modifier = Modifier.weight(1f))
-                Text("${s.distance_meters} m", modifier = Modifier.weight(1f))
+                Text(s.startedAt.format(DateTimeFormatter.RFC_1123_DATE_TIME), modifier = Modifier.weight(1f))
+                Text("${s.distanceMeters} m", modifier = Modifier.weight(1f))
                 Text("${s.steps}", modifier = Modifier.weight(1f))
             }
             Divider()
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RunSessionsTablePreview(){
+    GoFitTheme {
+        RunSessionsTable(
+            listOf(
+                RunSessionResponse(
+                    id = 1,
+                    steps = 1000,
+                    distanceMeters = 1000.toDouble(),
+                    startedAt = java.time.LocalDateTime.now(),
+                    endedAt = java.time.LocalDateTime.now().plus(1, ChronoUnit.HOURS),
+                    createdAt = java.time.LocalDateTime.now(),
+                    updatedAt = java.time.LocalDateTime.now(),
+                    userId = 1,
+                    durationSeconds = 1000
+                )
+            )
+        )
     }
 }

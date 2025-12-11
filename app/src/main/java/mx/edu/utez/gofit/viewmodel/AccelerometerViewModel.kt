@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mx.edu.utez.gofit.controller.AccelerometerManager
+import java.time.LocalDateTime
 import kotlin.math.sqrt
 
 class AccelerometerViewModel(
@@ -58,7 +59,7 @@ class AccelerometerViewModel(
         accelerometerManager.stop()
     }
 
-    fun sendSession(steps: Int, started: String, ended: String) {
+    fun sendSession() {
         viewModelScope.launch {
             _sendState.postValue(SendState(loading = true))
 

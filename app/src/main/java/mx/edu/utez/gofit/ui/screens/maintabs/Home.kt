@@ -18,43 +18,47 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import mx.edu.utez.gofit.data.UserPreferences
-import mx.edu.utez.gofit.network.RetrofitClient
-import mx.edu.utez.gofit.repository.RunSessionsRepository
-import mx.edu.utez.gofit.ui.RunSessionsTable
+import mx.edu.utez.gofit.model.RunSessionResponse
+import mx.edu.utez.gofit.ui.components.RunSessionsTable
 import mx.edu.utez.gofit.viewmodel.AccelerometerViewModel
 import mx.edu.utez.gofit.viewmodel.RunSessionsViewModel
-import mx.edu.utez.gofit.viewmodel.factory.AccelerometerViewModelFactory
-import mx.edu.utez.gofit.viewmodel.factory.RunSessionsViewModelFactory
 import java.time.LocalDateTime
 
 @Composable
-fun Home() {
-    val context = LocalContext.current
+fun Home(
+    accelVM: AccelerometerViewModel,
+    runVM: RunSessionsViewModel
 
-    val accelVM: AccelerometerViewModel = viewModel(
-        factory = AccelerometerViewModelFactory(context)
-    )
-
-    val client = RetrofitClient(UserPreferences(context))
-    val repo = RunSessionsRepository(client.runSessionsApi)
-
-    val runVM: RunSessionsViewModel = viewModel(factory = RunSessionsViewModelFactory(repo))
-
+) {
     val sessions by runVM.sessions.collectAsState()
-
-    var isRunning by remember { mutableStateOf(false) }
-    var startedAt by remember { mutableStateOf<LocalDateTime?>(null) }
-
     val steps by accelVM.steps.observeAsState(0)
     val meters by accelVM.meters.observeAsState(0f)
+    Home(
+        sessions = sessions,
+        steps = steps,
+        meters = meters,
+        start = accelVM::start,
+        stop = accelVM::stop,
+        sendSession = runVM::sendSession
+    )
+}
+
+@Composable
+fun Home(
+    sessions: List<RunSessionResponse>,
+    steps: Int,
+    meters: Float,
+    start: () -> Unit,
+    stop: () -> Unit,
+    sendSession: (Int, LocalDateTime, LocalDateTime) -> Unit
+){
+    var isRunning by remember { mutableStateOf(false) }
+    var startedAt by remember { mutableStateOf<LocalDateTime>(LocalDateTime.now()) }
 
     LaunchedEffect(isRunning) {
-        if (isRunning) accelVM.start() else accelVM.stop()
+        if (isRunning) start() else stop()
     }
 
     Column(
@@ -86,11 +90,7 @@ fun Home() {
                     isRunning = true
                 } else {
                     val endedAt = LocalDateTime.now()
-                    runVM.sendSession(
-                        steps = steps,
-                        started = startedAt.toString(),
-                        ended = endedAt.toString()
-                    )
+                    sendSession(steps, startedAt, endedAt)
                     isRunning = false
                 }
             },
@@ -113,6 +113,13 @@ fun Home() {
 @Composable
 fun HomePreview() {
     GoFitTheme {
-        Home()
+        Home(
+            sessions = emptyList(),
+            steps = 0,
+            meters = 0f,
+            start = {},
+            stop = {},
+            sendSession = { _, _, _ -> }
+        )
     }
 }
