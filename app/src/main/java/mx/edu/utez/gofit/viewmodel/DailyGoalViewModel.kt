@@ -33,7 +33,7 @@ class DailyGoalViewModel(
             val sessions = runSessionsRepository.getRunSessions()
 
             val totalDistanceToday = sessions
-                .filter { it.startedAt.toLocalDate() == LocalDate.now() }
+                .filter { LocalDate.parse(it.startedAt.substring(0, 10)) == LocalDate.now() }
                 .sumOf { it.distanceMeters }
 
             uiState = uiState.copy(

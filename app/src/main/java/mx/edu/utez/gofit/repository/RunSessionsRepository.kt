@@ -12,8 +12,8 @@ class RunSessionsRepository(private val api: RunSessionsApi) {
     suspend fun sendRunSession(steps: Int, started: LocalDateTime, ended: LocalDateTime) {
         val request = RegisterRunSessionRequest(
             steps = steps,
-            startedAt = started,
-            endedAt = ended
+            startedAt = started.toString(),
+            endedAt = ended.toString()
         )
         api.postRunSession(request)
     }

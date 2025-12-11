@@ -21,8 +21,12 @@ import java.time.LocalDate
 
 @Composable
 fun DailyGoalChartSection(sessions: List<RunSessionResponse>) {
-    val grouped = sessions.groupBy { it.startedAt.toLocalDate() }
-        .mapValues { it.value.sumOf { s -> s.distanceMeters } }
+    val grouped = sessions.groupBy {
+        LocalDate.parse(it.startedAt.substring(0, 10))
+    }.mapValues { entry ->
+        entry.value.sumOf { s -> s.distanceMeters }
+    }
+
 
     val week = (0..6).map { LocalDate.now().minusDays(it.toLong()) }.reversed()
 

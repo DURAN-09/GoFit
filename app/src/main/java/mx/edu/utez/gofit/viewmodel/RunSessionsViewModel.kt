@@ -27,6 +27,13 @@ class RunSessionsViewModel(private val repo: RunSessionsRepository) : ViewModel(
         }
     }
 
+    fun deleteSession(id: Long) {
+        viewModelScope.launch {
+            repo.deleteRunSession(id)
+            loadSessions()
+        }
+    }
+
     fun sendSession(steps: Int, started: LocalDateTime, ended: LocalDateTime) {
         viewModelScope.launch {
             try {

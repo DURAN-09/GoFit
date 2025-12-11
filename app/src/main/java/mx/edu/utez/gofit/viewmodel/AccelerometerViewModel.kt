@@ -51,6 +51,11 @@ class AccelerometerViewModel(
         processSteps(vx, vy, vz)
     }
 
+    fun clearData(){
+        _meters.value = 0f;
+        _steps.value = 0;
+    }
+
     fun start() {
         accelerometerManager.start()
     }

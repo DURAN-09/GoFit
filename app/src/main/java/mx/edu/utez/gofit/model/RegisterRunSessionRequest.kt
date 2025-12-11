@@ -5,6 +5,6 @@ import java.time.LocalDateTime
 
 data class RegisterRunSessionRequest(
     val steps: Int,
-    @SerializedName("started_at") val startedAt: LocalDateTime,
-    @SerializedName("ended_at") val endedAt: LocalDateTime
+    @SerializedName("started_at") val startedAt: String,
+    @SerializedName("ended_at") val endedAt: String
 )

@@ -41,7 +41,9 @@ fun Home(
         meters = meters,
         start = accelVM::start,
         stop = accelVM::stop,
-        sendSession = runVM::sendSession
+        sendSession = runVM::sendSession ,
+        clearData = accelVM::clearData,
+        onDeleteSession = { id -> runVM.deleteSession(id) }
     )
 }
 
@@ -52,10 +54,12 @@ fun Home(
     meters: Float,
     start: () -> Unit,
     stop: () -> Unit,
-    sendSession: (Int, LocalDateTime, LocalDateTime) -> Unit
-){
+    sendSession: (Int, LocalDateTime, LocalDateTime) -> Unit,
+    clearData: () -> Unit,
+    onDeleteSession: (Long) -> Unit
+) {
     var isRunning by remember { mutableStateOf(false) }
-    var startedAt by remember { mutableStateOf<LocalDateTime>(LocalDateTime.now()) }
+    var startedAt by remember { mutableStateOf(LocalDateTime.now()) }
 
     LaunchedEffect(isRunning) {
         if (isRunning) start() else stop()
@@ -92,6 +96,7 @@ fun Home(
                     val endedAt = LocalDateTime.now()
                     sendSession(steps, startedAt, endedAt)
                     isRunning = false
+                    clearData()
                 }
             },
             containerColor = if (!isRunning) Color(0xFF0A84FF) else Color.Red,
@@ -104,11 +109,12 @@ fun Home(
             )
         }
 
-        RunSessionsTable(sessions)
+        RunSessionsTable(
+            sessions = sessions,
+            onDelete = onDeleteSession)
     }
 }
-
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun HomePreview() {
@@ -119,7 +125,9 @@ fun HomePreview() {
             meters = 0f,
             start = {},
             stop = {},
-            sendSession = { _, _, _ -> }
+            sendSession = { _, _, _ -> },
+            clearData = {}
         )
     }
 }
+*/
