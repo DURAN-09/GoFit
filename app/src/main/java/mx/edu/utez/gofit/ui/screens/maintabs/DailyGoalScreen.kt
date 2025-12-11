@@ -17,16 +17,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import mx.edu.utez.gofit.model.DailyGoalResponse
+import mx.edu.utez.gofit.model.RunSessionResponse
 import mx.edu.utez.gofit.ui.components.DailyGoalChartSection
 import mx.edu.utez.gofit.ui.components.GoalProgressCircle
+import mx.edu.utez.gofit.ui.theme.GoFitTheme
+import mx.edu.utez.gofit.viewmodel.DailyGoalUiState
 import mx.edu.utez.gofit.viewmodel.DailyGoalViewModel
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalAmount
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.hours
 
 @Composable
 fun DailyGoalScreen(
     viewModel: DailyGoalViewModel
 ) {
     val state = viewModel.uiState
+    DailyGoalScreen(state)
+}
+
+@Composable
+fun DailyGoalScreen(
+    state: DailyGoalUiState
+){
 
     if (state.isLoading) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -78,5 +94,39 @@ fun DailyGoalScreen(
         Spacer(Modifier.height(12.dp))
 
         DailyGoalChartSection(sessions = state.sessions)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DailyGoalScreenPreview(){
+    GoFitTheme {
+        DailyGoalScreen(
+            DailyGoalUiState(
+                isLoading = false,
+                isUpdating = false,
+                goal = DailyGoalResponse(
+                    id = 1,
+                    distanceMeter = 1000,
+                    createdAt = java.time.LocalDateTime.now(),
+                    updatedAt = java.time.LocalDateTime.now()
+                ),
+                sessions = listOf(
+                    RunSessionResponse(
+                        id = 1,
+                        steps = 700,
+                        distanceMeters = 400.toDouble(),
+                        startedAt = java.time.LocalDateTime.now(),
+                        endedAt = java.time.LocalDateTime.now().plus(1, ChronoUnit.HOURS),
+                        createdAt = java.time.LocalDateTime.now(),
+                        updatedAt = java.time.LocalDateTime.now(),
+                        userId = 1,
+                        durationSeconds = 1000
+                    )
+                ),
+                todayProgress = 500f,
+                completion = 0.5f
+            )
+        )
     }
 }

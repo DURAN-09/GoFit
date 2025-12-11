@@ -2,6 +2,7 @@ package mx.edu.utez.gofit.ui.navigation.routes
 
 import android.net.http.SslCertificate.restoreState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
@@ -16,7 +17,8 @@ fun BottomBar(navController: NavHostController) {
 
     val items = listOf(
         MainRoutes.HOME,
-        MainRoutes.RECORD
+        MainRoutes.DAILY_GOAL,
+        MainRoutes.LEADERBOARD
     )
 
     NavigationBar {
@@ -32,8 +34,11 @@ fun BottomBar(navController: NavHostController) {
                 icon = {
                     Icon(
                         imageVector =
-                            if (route == MainRoutes.HOME) Icons.Default.Home
-                            else Icons.Default.Star,
+                            when (route) {
+                                MainRoutes.HOME -> Icons.Default.Home
+                                MainRoutes.DAILY_GOAL -> Icons.Default.Flag
+                                else -> Icons.Default.Star
+                            },
                         contentDescription = null
                     )
                 }

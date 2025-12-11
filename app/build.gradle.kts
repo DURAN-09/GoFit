@@ -50,6 +50,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
+
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.compose.runtime.livedata)
     testImplementation(libs.junit)
@@ -59,9 +61,9 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("com.squareup.retrofit2:retrofit:3.0.0")
-    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
-    implementation("androidx.navigation:navigation-compose:2.7.0")
-    implementation("androidx.compose.material:material:1.6.0")
-    implementation("androidx.navigation:navigation-compose:2.7.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.navigation.compose.v270)
 }
