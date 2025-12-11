@@ -10,8 +10,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mx.edu.utez.gofit.AppContainer
 import mx.edu.utez.gofit.ui.navigation.routes.main.MainRoutes
+import mx.edu.utez.gofit.ui.screens.maintabs.DailyGoalScreen
 import mx.edu.utez.gofit.ui.screens.maintabs.Home
-import mx.edu.utez.gofit.ui.screens.maintabs.RecordScreen
+import mx.edu.utez.gofit.ui.screens.maintabs.LeaderboardScreen
 
 @Composable
 fun MainTabsNavigation(
@@ -33,7 +34,16 @@ fun MainTabsNavigation(
                 runVM = viewModel(factory = appContainer.runSessionsViewModelFactory),
                 accelVM = viewModel(factory = appContainer.accelerometerViewModelFactory)
             )}
-            composable(MainRoutes.RECORD) { RecordScreen() }
+            composable(MainRoutes.DAILY_GOAL) {
+                DailyGoalScreen(
+                    viewModel(factory = appContainer.dailyGoalViewModelFactory)
+                )
+            }
+            composable(MainRoutes.LEADERBOARD) {
+                LeaderboardScreen(
+                    viewModel(factory = appContainer.leaderboardViewModelFactory)
+                )
+            }
         }
     }
 }
