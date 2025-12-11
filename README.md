@@ -55,7 +55,7 @@ La app realiza operaciones CRUD completas mediante Retrofit:
 
 - ViewModel
 
-- StateFlow / LiveData
+- StateFlow
 
 - Retrofit + Gson
 - Sensores (Acelerómetro)
