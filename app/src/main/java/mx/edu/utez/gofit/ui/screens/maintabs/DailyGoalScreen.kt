@@ -14,6 +14,10 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -21,7 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mx.edu.utez.gofit.model.DailyGoalResponse
 import mx.edu.utez.gofit.model.RunSessionResponse
+import mx.edu.utez.gofit.model.UpdateDailyGoalRequest
 import mx.edu.utez.gofit.ui.components.DailyGoalChartSection
+import mx.edu.utez.gofit.ui.components.EditGoalDialog
 import mx.edu.utez.gofit.ui.components.GoalProgressCircle
 import mx.edu.utez.gofit.ui.theme.GoFitTheme
 import mx.edu.utez.gofit.viewmodel.DailyGoalUiState
@@ -36,13 +42,16 @@ fun DailyGoalScreen(
     viewModel: DailyGoalViewModel
 ) {
     val state = viewModel.uiState
-    DailyGoalScreen(state)
+    DailyGoalScreen(state, viewModel::updateGoal)
 }
 
 @Composable
 fun DailyGoalScreen(
-    state: DailyGoalUiState
+    state: DailyGoalUiState,
+    updateGoal: (Float) -> Unit
 ){
+
+    var showEditDialog by remember { mutableStateOf(false) }
 
     if (state.isLoading) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -76,9 +85,7 @@ fun DailyGoalScreen(
         Spacer(Modifier.height(24.dp))
 
         Button(
-            onClick = {
-                //TODO: Open modal
-            },
+            onClick = { showEditDialog = true },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Editar meta diaria")
@@ -92,8 +99,17 @@ fun DailyGoalScreen(
         )
 
         Spacer(Modifier.height(12.dp))
-
         DailyGoalChartSection(sessions = state.sessions)
+        if (showEditDialog) {
+            EditGoalDialog(
+                currentGoal = state.goal?.distanceMeter?.toFloat() ?: 0f,
+                onDismiss = { showEditDialog = false },
+                onSave = { newGoal ->
+                    showEditDialog = false
+                    updateGoal(newGoal)
+                }
+            )
+        }
     }
 }
 
@@ -126,7 +142,8 @@ fun DailyGoalScreenPreview(){
                 ),
                 todayProgress = 500f,
                 completion = 0.5f
-            )
+            ),
+            updateGoal = {}
         )
     }
 }

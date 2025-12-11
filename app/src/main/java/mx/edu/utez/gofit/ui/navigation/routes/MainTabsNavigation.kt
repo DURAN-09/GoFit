@@ -13,7 +13,6 @@ import mx.edu.utez.gofit.ui.navigation.routes.main.MainRoutes
 import mx.edu.utez.gofit.ui.screens.maintabs.DailyGoalScreen
 import mx.edu.utez.gofit.ui.screens.maintabs.Home
 import mx.edu.utez.gofit.ui.screens.maintabs.LeaderboardScreen
-import mx.edu.utez.gofit.ui.screens.maintabs.RecordScreen
 
 @Composable
 fun MainTabsNavigation(
