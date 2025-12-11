@@ -102,19 +102,19 @@ fun LeaderboardScreenDistancePreview(){
                         id = 1,
                         userId = 1,
                         steps = 1000,
-                        startedAt = java.time.LocalDateTime.now(),
-                        endedAt = java.time.LocalDateTime.now().plus(1, ChronoUnit.HOURS),
-                        createdAt = java.time.LocalDateTime.now(),
-                        updatedAt = java.time.LocalDateTime.now()
+                        startedAt = java.time.LocalDateTime.now().toString(),
+                        endedAt = java.time.LocalDateTime.now().plus(1, ChronoUnit.HOURS).toString(),
+                        createdAt = java.time.LocalDateTime.now().toString(),
+                        updatedAt = java.time.LocalDateTime.now().toString()
                     ),
                     LeaderboardItemResponse(
                         id = 1,
                         userId = 1,
                         steps = 700,
-                        startedAt = java.time.LocalDateTime.now(),
-                        endedAt = java.time.LocalDateTime.now().plus(1, ChronoUnit.HOURS),
-                        createdAt = java.time.LocalDateTime.now(),
-                        updatedAt = java.time.LocalDateTime.now()
+                        startedAt = java.time.LocalDateTime.now().toString(),
+                        endedAt = java.time.LocalDateTime.now().plus(1, ChronoUnit.HOURS).toString(),
+                        createdAt = java.time.LocalDateTime.now().toString(),
+                        updatedAt = java.time.LocalDateTime.now().toString()
                     )
                 )
             ),
