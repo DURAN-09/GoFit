@@ -43,7 +43,7 @@ fun RunSessionsTable(sessions: List<RunSessionResponse>) {
 
         sessions.forEach { s ->
             Row(Modifier.fillMaxWidth()) {
-                Text(s.startedAt.format(DateTimeFormatter.RFC_1123_DATE_TIME), modifier = Modifier.weight(1f))
+                Text(s.startedAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")), modifier = Modifier.weight(1f))
                 Text("${s.distanceMeters} m", modifier = Modifier.weight(1f))
                 Text("${s.steps}", modifier = Modifier.weight(1f))
             }
